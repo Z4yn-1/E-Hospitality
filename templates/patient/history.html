@@ -1,0 +1,60 @@
+{% load static %}
+
+{% include 'patient/header.html' %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+    <title>BOOK HISTORY</title>
+</head>
+<body>
+
+    <div class="container">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700 border-b">NAME</th>
+                    <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700 border-b">DOCTOR NAME</th>
+                    <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700 border-b">SPECIALIZATION</th>
+                    <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700 border-b">DATE</th>
+                    <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700 border-b">TIME</th>
+                    <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700 border-b">CANCEL</th>
+                    <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700 border-b">UPDATE</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for appoinment in appoinments %}
+                <tr>
+                    <td>{{ appoinment.patient_name }}</td>
+                    <td>{{ appoinment.doctor.name }}</td>
+                    <td>{{ appoinment.doctor.specialization }}</td>
+                    <td>{{ appoinment.date }}</td>
+                    <td>{{ appoinment.time }}</td>
+                    <td>
+                        <a href="{% url 'cancel' appoinment.id %}" class="btn btn-danger">CANCEL</a> 
+                    </td>   
+                    <td>
+                            <a href="{% url 'update' appoinment.id %}" class="btn btn-primary">UPDATE</a>
+                    </td> 
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <center>
+        <div class="cont" style="margin-top: 20px; margin-bottom: 20px;">
+        <a href="{% url 'patientindex' %}" class="btn btn-secondary" style="width: 80px;">BACK</a>
+    </div>
+    </center>
+    
+
+
+
+</body>
+</html>
+
+{% include 'patient/footer.html' %}

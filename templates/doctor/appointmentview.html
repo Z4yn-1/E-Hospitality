@@ -1,0 +1,52 @@
+{% load static %}
+
+{% include 'doctor/header.html' %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Appointment View</title>
+</head>
+<body>
+    
+    <div class="container shadow mt-4 mb-5">
+        <table class="table text-center">
+            <thead>
+                <tr>
+                    <th>NAME</th>
+                    <th>DATE</th>
+                    <th>TIME</th>
+                    <th>REASON</th>
+                    <th>REMOVE</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for appt in appointments %}
+            <tr>
+                <td>{{ appt.patient_name }}</td>
+                <td>{{ appt.date }}</td>
+                <td>{{ appt.time }}</td>
+                <td>{{ appt.reason }}</td>
+                <td>
+                    <a href="{% url 'cancelapp' appt.id %}" class="btn btn-danger btn-md shadow-md rounded-full">REMOVE</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="5">No appointments yet.</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+            
+
+        
+            
+    </div>
+
+</body>
+</html>
+
+{% include 'doctor/footer.html' %}

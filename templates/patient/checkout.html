@@ -1,0 +1,43 @@
+{% load static %}
+{% include 'patient/header.html' %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout</title>
+</head>
+<body>
+
+    <div class="container mt-5 mb-4">
+    <div class="card shadow-lg p-4">
+        <h3 class="mb-3">Checkout</h3>
+        <hr>
+
+        <p><strong>Doctor:</strong> {{ doctor.name }} ({{ doctor.specialization }})</p>
+        <p><strong>Appointment Date:</strong> {{ appointment.date }}</p>
+        <p><strong>Time:</strong> {{ appointment.time }}</p>
+        <p><strong>Reason:</strong> {{ appointment.reason }}</p>
+
+        <hr>
+        <h4 class="text-end">Fees: ₹{{ fees }}</h4>
+
+        <div class="d-flex justify-content-end">
+            <form method="post" action="{% url 'create_checkout_session' appointment.id %}">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-success btn-lg">
+                    Proceed To Pay
+                </button>
+                <a href="{% url 'doclist' %}" class="btn btn-secondary btn-lg">CANCEL</a>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+    
+</body>
+</html>
+
+{% include 'patient/footer.html' %}

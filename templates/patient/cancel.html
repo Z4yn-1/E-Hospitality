@@ -1,0 +1,21 @@
+{% load static %}
+{% include 'patient/header.html' %}
+
+<center>
+    <div class="container mt-5 mb-5" style="width: 60%;">
+    <div class="card shadow p-4">
+        <h4 class="mb-3 text-danger">Are you sure you want to cancel this {{ appointment.patient_name }} appointment?</h4>
+        <p><strong>Doctor:</strong> {{ appointment.doctor.name }} ({{ appointment.doctor.specialization }})</p>
+        <p><strong>Date:</strong> {{ appointment.date }} | <strong>Time:</strong> {{ appointment.time }}</p>
+        <p><strong>Reason:</strong> {{ appointment.reason }}</p>
+
+        <form method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">YES</button>
+            <a href="{% url 'history' %}" class="btn btn-secondary">Go Back</a>
+        </form>
+    </div>
+</div>
+</center>
+
+{% include 'patient/footer.html' %}

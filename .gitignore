@@ -1,0 +1,32 @@
+# Django
+*.pyc
+__pycache__/
+db.sqlite3
+media/
+.env
+
+# Migrations
+*/migrations/*.py
+!*/migrations/__init__.py
+
+# Static files (can be rebuilt)
+staticfiles/
+static_root/
+
+# IDE / Editor settings
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Python virtual environment
+venv/
+ENV/
+env/

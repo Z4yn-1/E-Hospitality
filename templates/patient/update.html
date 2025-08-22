@@ -1,0 +1,53 @@
+{% load static %}
+
+{% include 'patient/header.html' %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>APPIONMENT</title>
+</head>
+<body>
+    
+    <div class="container shadow p-5" style="margin-top: 30px; margin-bottom: 50px;">
+        <h2 style="margin-bottom: 20px; margin-top: 0px;">Book Appointment with {{ doctor.name }}</h2>
+        <form action="" method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="">DOCTOR</label>
+                <input type="text" value="{{ doctor.name }}" readonly class="form-control"><br><br>
+            </div>
+            <div class="form-group">
+                <label for="">SPECIALIZATION</label>
+                <input type="text" value="{{ doctor.specialization }}" readonly class="form-control"><br><br>
+            </div>
+            <div class="form-group">
+                <label for="">PATIENT NAME</label>
+                <input type="text" value="{{ patient.name }}" name="patient_name" class="form-control"><br><br>
+            </div>
+            <div class="form-group">
+                <label for="">DATE</label>
+                <input type="date" value="{{ appointment.date|date:'Y-m-d' }}" name="date" class="form-control"><br><br>
+            </div>
+            <div class="form-group">
+                <label for="">TIME</label>
+                <input type="time" value="{{ appointment.time|time:'H:i' }}" name="time" class="form-control"><br><br>
+            </div>
+            <div class="form-group">
+                <label for="">REASON</label>
+                <textarea name="reason" class="form-control">{{ appointment.reason }}</textarea><br><br>
+            </div>
+            <center>
+                <button type="submit" class="btn btn-primary" >UPDATE</button> &nbsp;
+                <a href="{% url 'history' %}" class="btn btn-secondary" style="width: 100px;">BACK</a>
+            </center>
+        </form>
+    </div>
+
+</body>
+</html>
+
+
+{% include 'patient/footer.html' %}

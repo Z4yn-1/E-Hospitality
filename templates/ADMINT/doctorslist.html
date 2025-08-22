@@ -1,0 +1,80 @@
+{% load static %}
+
+{% include 'ADMINT/header.html' %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+    <title>DOCTOR's</title>
+</head>
+<body>
+
+    <div class="container">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>NAME</th>
+                    <th>SPECIALIZATION</th>
+                    <th>ACTION</th>
+                    <th>AVAILABLITY</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for doctor in page_obj %}
+                <tr>
+                    <td>{{ doctor.name }}</td>
+                    <td>{{ doctor.specialization }}</td>
+                    <td>
+                        <a href="{% url 'docdelete' doctor.id %}" class="btn btn-danger">REMOVE</a>        
+                    </td>
+                    <td>
+                        {% if doctor.is_available %}
+                            <a href="{% url 'available' doctor.id %}" class="btn btn-success">AVAILABLE</a>
+                        {% else %}
+                            <a href="{% url 'available' doctor.id %}" class="btn btn-danger">UNAVAILABLE</a>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <nav aria-label="Doctor pagination">
+  <ul class="pagination justify-content-center">
+    {% if page_obj.has_previous %}
+      <li class="page-item">
+        <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+      </li>
+    {% else %}
+      <li class="page-item disabled"><span class="page-link">Previous</span></li>
+    {% endif %}
+
+    {% for num in page_obj.paginator.page_range %}
+      {% if page_obj.number == num %}
+        <li class="page-item active"><span class="page-link">{{ num }}</span></li>
+      {% else %}
+        <li class="page-item"><a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
+      {% endif %}
+    {% endfor %}
+
+    {% if page_obj.has_next %}
+      <li class="page-item">
+        <a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a>
+      </li>
+    {% else %}
+      <li class="page-item disabled"><span class="page-link">Next</span></li>
+    {% endif %}
+  </ul>
+</nav>
+    
+
+
+
+</body>
+</html>
+
+{% include 'ADMINT/footer.html' %}
