@@ -78,7 +78,7 @@ def UsersView(request):
         
     user = MyUser.objects.filter(role='patient')
         
-    paginator = Paginator(user, 5)  # 5 users per page
+    paginator = Paginator(user, 5) 
     page_number = request.GET.get('page')   
     page_obj = paginator.get_page(page_number)
         
@@ -93,7 +93,7 @@ def Availability(request,doc_id):
         return redirect('login')
     
     doctor = MyUser.objects.get(id=doc_id, role='doctor')
-    doctor.is_available = not doctor.is_available   # ✅ flip availability
+    doctor.is_available = not doctor.is_available  
     doctor.save()
 
     messages.success(request, f"{doctor.name}'s availability updated.")
