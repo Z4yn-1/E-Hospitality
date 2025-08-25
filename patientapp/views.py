@@ -180,7 +180,6 @@ def CheckoutView(request, app_id):
 
 
 def create_checkout_session(request, app_id):
-    """Create Stripe Checkout Session (card only)"""
     if request.session.get('role') != 'patient':
         return redirect('login')
 
@@ -193,7 +192,6 @@ def create_checkout_session(request, app_id):
     if doctor.fees is None:
         return HttpResponseBadRequest("Doctor has no fee set.")
 
-    # Convert doctor fees (e.g. 500.00) into paise (e.g. 50000)
     amount_in_paise = int((Decimal(doctor.fees).quantize(Decimal('0.01'), rounding=ROUND_HALF_UP) * 100))
 
     stripe.api_key = settings.STRIPE_SECRET_KEY
@@ -223,7 +221,6 @@ def create_checkout_session(request, app_id):
 
 
 def stripe_success(request):
-    """Mark appointment paid after successful payment"""
     session_id = request.GET.get("session_id")
     if not session_id:
         return redirect("patient_dashboard")
